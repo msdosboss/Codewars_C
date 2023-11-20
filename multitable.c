@@ -33,7 +33,7 @@ int **multiplication_table(int n) {
 
     for(int i = 0; i < n; i++){
         for(int j = 0; j < n; j++){
-            //*(*(table + sizeof(int*) * 1) + sizeof(int) * 0) = 1;                             When this is uncommented it causes a segfault when i = 0 and j = 1.
+            //*(*(table + sizeof(int*) * 1) + sizeof(int) * 0) = 1;                             When this is uncommented it causes a segfault when i = 0 and j = 1. but the seg fault does not occur until line 40
             printf("Memaddr: 0x%x\n", (*(table + sizeof(int*) * i) + sizeof(int) * j));
             printf("%d %d\n", i, j);
             fflush(stdout);

@@ -1,45 +1,80 @@
+/*NOW WORKS AS INTENDED*/
+
+
+
+
+
+
+
+
+
+
 #include <stdlib.h>
 #include <stdio.h>
 
 int **multiplication_table(int);
 
 void main(){
+    printf("\nsizeof(int): %d\nsizeof(int*): %d\n sizeof(int**) %d\n",sizeof(int),sizeof(int*),sizeof(int**));
     int **orcatable;
     orcatable = multiplication_table(4);
     for(int i = 0; i < 4; i++){
         for(int j = 0; j < 4; j++){
-            printf("%d\n", *(*(orcatable + sizeof(int*) * i) + sizeof(int*) * j));
+            printf("\nStart of loop\n");
+            printf("Memaddr: 0x%x\n", (orcatable[i] + sizeof(int) * j));
+            printf("%d\n", *(orcatable[i] + sizeof(int) * j));
+            printf("\n%d %d\n\n", i, j);   
         }
+        free(orcatable[i]);
     }
+    free(orcatable);
+    
 }
 
 
 int **multiplication_table(int n) {
     int **table;
-    table = (int**)malloc(sizeof(int**) * n + 1);
+    table = (int**)malloc(sizeof(int*) * n);
     for(int i = 0; i < n; i++){
-        *(table + sizeof(int*) * i) = (int*)malloc(sizeof(int*) * n + 1);
-        printf("Memaddr: 0x%x\n",*(table + sizeof(int*) * i));
-        if(*(table + sizeof(int*) * i) == NULL){
+        table[i] = (int*)malloc(sizeof(table) * (n * n));
+        printf("Memaddr: 0x%x\n",table[i]);
+        if(table[i] == NULL){
             printf("warning");
         }
     }
 
-    printf("\n\n\n");
-    fflush(stdout);
-    *(*(table + sizeof(int*) * 1) + sizeof(int) * 0) = 1;
-    printf("Memaddr: 0x%x\n", (*(table + sizeof(int*) * 1) + sizeof(int) * 0));
+    //printf("\n\n\n");
+    //fflush(stdout);
+
 
 
     for(int i = 0; i < n; i++){
         for(int j = 0; j < n; j++){
-            *(*(table + sizeof(int*) * 1) + sizeof(int) * 0) = 1;                             //When this is uncommented it causes a segfault when i = 0 and j = 1. but the seg fault does not occur until line 40 img1 is when this is commented out img2 is the output when this is uncommented
-            printf("Memaddr: 0x%x\n", (*(table + sizeof(int*) * i) + sizeof(int) * j));
-            printf("%d %d\n", i, j);
-            fflush(stdout);
-            *(*(table + (sizeof(int*) * i)) + (sizeof(int) * j)) = (i + 1) * (j + 1);
+            //printf("\nStart of loop\n");
+            //printf("Memaddr: 0x%x\n", (table[i] + sizeof(int) * j));
+            //printf("%d %d\n", i, j);
+            //fflush(stdout);
+            //printf("\n(i + 1) * (j + 1):%d\n",((i + 1) * (j + 1)));
+            *(table[i] + (sizeof(int) * j)) = ((i + 1) * (j + 1));
+            //printf("\nThis is the value of *(table[i] + (sizeof(int) * j)): %d\n", *(table[i] + (sizeof(int) * j)));
         }
     }
+
+    /*for(int i = 0; i < 4; i++){
+        for(int j = 0; j < 4; j++){
+            printf("\nStart of loop\n");
+            printf("\nMemaddr: 0x%x\n", (table[i] + (sizeof(int)) * j));
+            printf("\n%d\n", *(table[i] + sizeof(int) * j));
+            printf("\n%d %d\n", i, j);
+        }
+    }*/
+
+    
+    /*printf("\nMemaddr: 0x%x\n", (table[0]));
+    printf("\nMemaddr: 0x%x\n", (table[0] + 4));
+    printf("\nMemaddr: 0x%x\n", (table[0] + 8));
+    printf("\nMemaddr: 0x%x\n", (table[0] + 12));
+    printf("\nMemaddr: 0x%x\n", (table[1]));*/
 
     return table;
 
@@ -55,10 +90,6 @@ int **multiplication_table(int n) {
 
 
 
-
-//*(*(table + sizeof(int*) * 1) + sizeof(int) * 0) = (1 + 1) * (0 + 1); This one causes segfault (I have replaced the i and j with their vaules when it causes a segfault)
-
-//*(*(table + sizeof(int*) * 1) + sizeof(int) * 0) = 1;            This one does not (This is only true when it is not run in the for loop otherwise refer to line 36)
 
 
 

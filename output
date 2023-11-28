@@ -1,0 +1,155 @@
+
+sizeof(int): 4
+sizeof(int*): 8
+Memaddr: 0x7eb972e0
+Memaddr: 0x7eb97300
+Memaddr: 0x7eb97320
+Memaddr: 0x7eb97340
+
+
+
+Memaddr: 0x0
+Memaddr: 0x7eb972e0
+0 0
+
+(i + 1) * (j + 1):1
+Memaddr: 0x7eb972f0
+0 1
+
+(i + 1) * (j + 1):2
+Memaddr: 0x7eb97300
+0 2
+
+(i + 1) * (j + 1):3
+Memaddr: 0x7eb97310
+0 3
+
+(i + 1) * (j + 1):4
+Memaddr: 0x7eb97300
+1 0
+
+(i + 1) * (j + 1):2
+Memaddr: 0x7eb97310
+1 1
+
+(i + 1) * (j + 1):4
+Memaddr: 0x7eb97320
+1 2
+
+(i + 1) * (j + 1):6
+Memaddr: 0x7eb97330
+1 3
+
+(i + 1) * (j + 1):8
+Memaddr: 0x7eb97320
+2 0
+
+(i + 1) * (j + 1):3
+Memaddr: 0x7eb97330
+2 1
+
+(i + 1) * (j + 1):6
+Memaddr: 0x7eb97340
+2 2
+
+(i + 1) * (j + 1):9
+Memaddr: 0x7eb97350
+2 3
+
+(i + 1) * (j + 1):12
+Memaddr: 0x7eb97340
+3 0
+
+(i + 1) * (j + 1):4
+Memaddr: 0x7eb97350
+3 1
+
+(i + 1) * (j + 1):8
+Memaddr: 0x7eb97360
+3 2
+
+(i + 1) * (j + 1):12
+Memaddr: 0x7eb97370
+3 3
+
+(i + 1) * (j + 1):16
+Memaddr: 0x7eb972e0
+1
+
+0 0
+
+Memaddr: 0x7eb972f0
+2
+
+0 1
+
+Memaddr: 0x7eb97300
+2
+
+0 2
+
+Memaddr: 0x7eb97310
+4
+
+0 3
+
+Memaddr: 0x7eb97300
+2
+
+1 0
+
+Memaddr: 0x7eb97310
+4
+
+1 1
+
+Memaddr: 0x7eb97320
+3
+
+1 2
+
+Memaddr: 0x7eb97330
+6
+
+1 3
+
+Memaddr: 0x7eb97320
+3
+
+2 0
+
+Memaddr: 0x7eb97330
+6
+
+2 1
+
+Memaddr: 0x7eb97340
+4
+
+2 2
+
+Memaddr: 0x7eb97350
+8
+
+2 3
+
+Memaddr: 0x7eb97340
+4
+
+3 0
+
+Memaddr: 0x7eb97350
+8
+
+3 1
+
+Memaddr: 0x7eb97360
+12
+
+3 2
+
+Memaddr: 0x7eb97370
+16
+
+3 3
+

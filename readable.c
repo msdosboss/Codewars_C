@@ -13,11 +13,11 @@ char *formatDuration (int n) {
         strcpy(nowStr, "now");
         return nowStr;
     }
-    if(n >= 31540000)
+    if(n >= 31536000)
         wordCount++;
-    while(n >= 31540000){
+    while(n >= 31536000){
         yearCount++;
-        n = n - 31540000;
+        n = n - 31536000;
     }
     if(n >= 86400)
         wordCount++;
@@ -103,14 +103,14 @@ char *formatDuration (int n) {
     }
     if(minuteCount > 0){
         if(flag == 0){
-            if(dayCount == 1)
+            if(minuteCount == 1)
                 sprintf(str, "%d minute", minuteCount);
             else
                 sprintf(str, "%d minutes", minuteCount);
             flag++;
         }
         else{
-            if(dayCount == 1)
+            if(minuteCount == 1)
                 sprintf(str, "%s%d minute", str, minuteCount);
             else
                 sprintf(str, "%s%d minutes", str, minuteCount);

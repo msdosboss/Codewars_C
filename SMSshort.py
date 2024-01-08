@@ -36,4 +36,4 @@ print(shortener('SMS messages are limited to 160 characters. It tends to be irri
 
 #the cat jumps
 #the catjuumps
-#the cat jumps
+#thecatjumps

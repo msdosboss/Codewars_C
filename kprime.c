@@ -39,9 +39,11 @@ int amountPrimeFactors(int n){
     while(isPrime(n) == 0){
         int i = 0;
         for(; n % primenumbers[i] != 0; i++);
+        printf("this is i: %d in amountPrimeFactors\n", i);
         n = n / primenumbers[i];
         numberOfPrimes++; 
     }
+    printf("we are returning: %d\n", numberOfPrimes);
     return numberOfPrimes;
 }
 

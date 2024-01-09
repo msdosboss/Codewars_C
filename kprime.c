@@ -33,42 +33,76 @@ int isPrime(int n){
     }
     return 1;
 }
-int amountPrimeFactors(int n){
-    int primenumbers[50] = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229};
-    int numberOfPrimes = 0;
+
+int amountOfPrimes(struct list* l){
+    int largestNumber = 0;
+    struct node * orcanode = l->head;
+    for(size_t i = 0; i < l->sz; i++){
+        if(orcanode->data > largestNumber){
+            largestNumber = orcanode->data;
+        }
+        orcanode = orcanode->next;
+    }
+    int amountOfPrimeNumbers = 0;
+    for(int i = 0; i * 2 < largestNumber; i++){
+        if(isPrime(i))
+            amountOfPrimeNumbers++;
+    }
+    return amountOfPrimeNumbers;
+}
+
+int * primenumberpointer(struct list* l){
+    int largestNumber = 0;
+    struct node * orcanode = l->head;
+    for(size_t i = 0; i < l->sz; i++){
+        if(orcanode->data > largestNumber){
+            largestNumber = orcanode->data;
+        }
+        orcanode = orcanode->next;
+    }
+    int amountOfPrimeNumbers = amountOfPrimes(l);
+    int *primeNumbers = malloc(sizeof(int) * (amountOfPrimeNumbers + 1));
+    amountOfPrimeNumbers = 0;
+    for(int i = 0; i * 2 < largestNumber; i++){
+        if(isPrime(i)){
+            primeNumbers[amountOfPrimeNumbers] = i;
+            amountOfPrimeNumbers++;
+        }
+    }
+    primeNumbers[amountOfPrimeNumbers] = -1;
+    return primeNumbers;
+}
+
+int amountPrimeFactors(int n, int *primeNums){
+    int numberOfPrimes = 1;
     while(isPrime(n) == 0){
         int i = 0;
-        for(; n % primenumbers[i] != 0; i++);
-        printf("this is i: %d in amountPrimeFactors\n", i);
-        n = n / primenumbers[i];
+        for(; n % primeNums[i] != 0; i++);
+        n = n / primeNums[i];
         numberOfPrimes++; 
     }
-    printf("we are returning: %d\n", numberOfPrimes);
     return numberOfPrimes;
 }
 
 // function to write
 int consecKprimes(int k, struct list* l) {
-    printf("this is k: %d\n", k);
-    
+    int *primeNums = malloc(sizeof(int) * (amountOfPrimes(l) + 1));
+    primeNums = primenumberpointer(l);
     struct node *orcanode;
     int matches = 0;
     orcanode = l->head;
-    for(size_t i = 0; i < l->sz; i = i + 2){
+    for(size_t i = 1; i < l->sz; i++){
         int a, b;
         a = (*orcanode).data;
         orcanode = (*orcanode).next;
         b = (*orcanode).data;
-        orcanode = (*orcanode).next;
-        printf("a is: %d b is: %d\n", a, b);
-        a = amountPrimeFactors(a);
-        b = amountPrimeFactors(b);
-        printf("a is: %d after b is: %d after\n", a, b);
+        a = amountPrimeFactors(a, primeNums);
+        b = amountPrimeFactors(b, primeNums);
         if(a == k && b == k){
-            printf("orca\n");
             matches++;
         }
     }
+    free(primeNums);
     return matches;
 }
 

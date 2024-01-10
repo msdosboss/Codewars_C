@@ -107,7 +107,7 @@ void brainfuck(const char *code, const char *input, char *output) {
 
 void main(){
     char output[1025];
-    brainfuck("+++++++,[.,]","helloworld",output);
+    brainfuck("--[----->+<]>---.++++++++++++.+.+++++++++.+[-->+<]>+++.++[-->+++<]>.++++++++++++.+.+++++++++.-[-->+++++<]>++.[--->++<]>-.-----------.","",output);
     printf("This is my output %s\n", output);
 }
 

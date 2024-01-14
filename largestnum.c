@@ -19,24 +19,23 @@ int last_digit(const char *a, const char *b){
     }
     strcpy(bb,b);
     int lenbb = strlen(bb);
-    if(bb[strlen(bb)] == '\0')
-        printf("\nbb[1] is null\n");
     aa = aa % 10;
     if((aa == 0 && bb[1] == '\0' && bb[0] == 0) || (bb[1] == '\0' && bb[0] == 0))
         return 1;
     int prod = 1;
-    long ii = 1;
+    //long ii = 1;
+    unsigned long *ii;
+    int iiCnt = 0;
+    ii = malloc(sizeof(long));
+    ii[0] = 1;
     while(1){
-        printf("\nii = %d\n", ii);
         printf("bb = %s\n", bb);
         if((bb[lenbb - 1] - '0') % 2 == 1){
-            printf("\nii = %d\n",ii);
-            /*for(int i = 0; i < ii; i++){
-                prod = prod * aa;
+            for(int i = 0; i <= iiCnt; i++){
+                prod = (prod * pow(aa,ii[i]));
                 prod = prod % 10;
-            }*/
-            prod = (prod * pow(aa,ii));
-            prod = prod % 10;
+                printf("prod is %d\n", prod);
+            }
         }
         if(bb[lenbb - 1] == '1' && bb[lenbb - 2] == '\0') 
             break;
@@ -50,10 +49,8 @@ int last_digit(const char *a, const char *b){
         for(int i = 0;; i++){
             if(bb[i] != '0')
                 break;
-            printf("shortning the string\n");
             lenbbb++;
         }
-        printf("this is bb before get shrunk %s\n", bb);
         if(lenbb != 0){ 
             char *bbb;
             bbb = malloc(sizeof(char) * (lenbb - lenbbb) + 1);
@@ -63,7 +60,16 @@ int last_digit(const char *a, const char *b){
             free(bbb);
             lenbb = strlen(bb);
         }
-        ii = ii * 2;
+        if(ii[iiCnt] * 2 < (pow(2,(sizeof(long) * 8)) / 2)){
+                printf("ii[iiCnt] is: %d\n", ii[iiCnt]);
+                ii[iiCnt] = ii[iiCnt] * 2;
+                printf("ii[iiCnt] is: %d\n", ii[iiCnt]);
+            }
+        else{
+            ii = realloc(ii, sizeof(long) * (iiCnt + 1));
+            iiCnt++;
+            ii[iiCnt] = 1;
+        }
         
     }
     free(bb);
@@ -73,8 +79,7 @@ int last_digit(const char *a, const char *b){
 
 
 void main(){
-    printf("\n%d\n", sizeof(long));
-    //printf("\n%d\n",last_digit("1606938044258990275541962092341162602522202993782792835301376","2037035976334486086268445688409378161051468393665936250636140449354381299763336706183397376"));
+    printf("\n%d\n",last_digit("1606938044258990275541962092341162602522202993782792835301376","2037035976334486086268445688409378161051468393665936250636140449354381299763336706183397376"));
 }
 
 

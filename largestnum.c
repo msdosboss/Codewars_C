@@ -61,11 +61,12 @@ int last_digit(const char *a, const char *b){
             lenbb = strlen(bb);
         }
         if(ii[iiCnt] * 2 < (pow(2,(sizeof(long) * 8)) / 2)){
-                printf("ii[iiCnt] is: %d\n", ii[iiCnt]);
+                printf("ii[iiCnt] is: %ld\n", ii[iiCnt]);
                 ii[iiCnt] = ii[iiCnt] * 2;
-                printf("ii[iiCnt] is: %d\n", ii[iiCnt]);
+                printf("ii[iiCnt] is: %ld\n", ii[iiCnt]);
             }
         else{
+            printf("ii is being realloc while iicnt = %d", iiCnt);
             ii = realloc(ii, sizeof(long) * (iiCnt + 1));
             iiCnt++;
             ii[iiCnt] = 1;

@@ -11,37 +11,27 @@
 int** getSkyline(int** buildings, int buildingsSize, int* buildingsColSize, int* returnSize, int** returnColumnSizes) {
 	int farthestRightPoint = 0;
 	for(int i = 0; i < buildingsSize; i++){
-		printf("orca-1");	
-		fflush(stdout);
 		if(buildings[i][1] > farthestRightPoint){
 			farthestRightPoint = buildings[i][1];
 		}
 		
 	}
-	printf("orca0");
-	fflush(stdout);
 	int *buildingPoints; 
 	buildingPoints = malloc(sizeof(buildingPoints) * (farthestRightPoint + 1));
 	for(int i = 0; i <= farthestRightPoint; i++){
 		buildingPoints[i] = 0;
 	}
-	printf("orca1");
-	fflush(stdout);
 	for(int i = 0; i < buildingsSize; i++){
 		for(int j = buildings[i][0]; j < buildings[i][1]; j++){
-			buildingPoints[j] = (buildingPoints[j] < buildings[i][2]) ? buildings[i][2] : buildingPoints[i];	
+			buildingPoints[j] = (buildingPoints[j] < buildings[i][2]) ? buildings[i][2] : buildingPoints[j];	
 		}
 	}
-	printf("orca2");
-	fflush(stdout);
 	int currentHeight = 0;
 	*returnSize = 0;
 	returnColumnSizes = NULL;
 	for(int i = 0; i <= farthestRightPoint; i++){
 		if(buildingPoints[i] != currentHeight){
 			(*returnSize)++;
-			printf("neworca[%d]", i);
-			fflush(stdout);
 			returnColumnSizes = realloc(returnColumnSizes, sizeof(int**) * *returnSize);
 			returnColumnSizes[*returnSize - 1] = malloc(sizeof(**returnColumnSizes) * 2);
 			returnColumnSizes[*returnSize - 1][0] = i;
@@ -49,12 +39,10 @@ int** getSkyline(int** buildings, int buildingsSize, int* buildingsColSize, int*
 			currentHeight = buildingPoints[i];
 		}
 	}
-	printf("orca3\ninside [%d, %d]\n", returnColumnSizes[0][0], returnColumnSizes[0][1]);
-	fflush(stdout);
 	free(buildingPoints);
 	return returnColumnSizes;	
 }
-
+//Test written by ChatGPT
 int main() {
     int buildings11[][3] = {{2, 9, 10}, {3, 7, 15}, {5, 12, 12}, {15, 20, 10}, {19, 24, 8}};
     int buildings21[][3] = {{0, 2, 3}, {2, 5, 3}};
@@ -77,14 +65,9 @@ for(int i = 0; i < 5; i++){
 }
 free(buildings1);
     printf("Example 1 Output: ");
-    fflush(stdout);
     for (int i = 0; i < *returnSize1; ++i) {
         printf("[%d, %d] ", skyline1[i][0], skyline1[i][1]);
-	fflush(stdout);
     }
-printf("orca4\n");
-    printf("\n");
-fflush(stdout);
 
 /*
     int* returnSize2;
@@ -100,11 +83,8 @@ fflush(stdout);
     for (int i = 0; i < *returnSize1; ++i) {
         free(skyline1[i]);
     }
-printf("orca5\n");
     free(skyline1);
-printf("orca6\n");
     free(returnSize1);
-printf("orca7\n");
     //free(returnColumnSizes1);
 //printf("orca8\n");
 

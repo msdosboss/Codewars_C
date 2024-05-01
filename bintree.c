@@ -9,6 +9,49 @@ struct TreeNode{
 	
 };
 
+void buildTreeHelper(int *inorder, int *postorder, int size, struct TreeNode *root, int leftNodeOffset, int *n){		//leftNodeOffset is the amount of right steps we went if the node went right from also has a left node
+	int inorderRootIndex;
+	int orca = 0;	
+	for(int i = 0; i < size; i++){
+		if(inorder[i] == postorder[size - 1]){
+			inorderRootIndex = i;
+		}
+	}
+	root[*n].val = inorder[inorderRootIndex];
+	printf("orca\n");
+	//fflush(stdout);
+	if(inorderRootIndex != 0){		//traversing the left side
+		root[*n].left = &(root[*n + 1]);	
+		(*n)++;
+		printf("left traversal n = %d\n", *n);
+		fflush(stdout);
+		buildTreeHelper(inorder, postorder, inorderRootIndex, root, leftNodeOffset, n);
+	}
+	else{
+		root[*n].left == NULL;
+	}
+	if(size > inorderRootIndex){		//traversing the right side
+		if(orca == 1){
+			leftNodeOffset++;
+		}	
+		root[*n].right = &(root[*n + 1]);
+		(*n)++;
+		printf("right traversal\n");
+		fflush(stdout);
+		buildTreeHelper(&(inorder[inorderRootIndex]), &(postorder[inorderRootIndex]), size - 1, root, leftNodeOffset, n);
+	}
+	else{
+		root[*n].right == NULL;
+	}
+}
+
+struct TreeNode *buildTree(int *inorder, int inorderSize, int *postorder, int postorderSize){
+	struct TreeNode *root = malloc(sizeof(struct TreeNode) * inorderSize);
+	int n = 0;
+	buildTreeHelper(inorder, postorder, inorderSize, root, 0, &n);
+	return root;
+}
+
 void isTargetSum(struct TreeNode *current, bool *isSum, int targetSum, int *n){
 	*n += current->val;
 	if(current->left == NULL && current->right == NULL){
@@ -264,7 +307,7 @@ void nodeConstructor(struct TreeNode *node, struct TreeNode *left, struct TreeNo
 
 
 int main(){
-	//int *nodeCount = malloc(sizeof(int));
+	int *nodeCount = malloc(sizeof(int));
 
 	struct TreeNode *a = malloc(sizeof(struct TreeNode));
 	struct TreeNode *b = malloc(sizeof(struct TreeNode));
@@ -286,7 +329,7 @@ int main(){
 	//nodeConstructor(g, NULL, NULL, 881);
 	nodeConstructor(h, NULL, NULL, 321);
 	
-	printf("\n %d \n",hasPathSum(a, 363));
+	//printf("\n %d \n",hasPathSum(a, 363));
 
 	/*int *returnColumnSize;
 	int returnSize;
@@ -307,13 +350,16 @@ int main(){
 		}
 	}*/
 	
-	//int *result = postorderTraversal(a, nodeCount);
+	int *postorderResult = postorderTraversal(a, nodeCount);
 	//int *result = preorderTraversal(a, nodeCount);
-	//int *result = inorderTraversal(a, nodeCount);
+	int *inorderResult = inorderTraversal(a, nodeCount);
 	/*for(int i = 0; i < *nodeCount; i++){
 		printf("result[%d] = %d\n", i, result[i]);
 	}//*/
-
+	struct TreeNode *root = buildTree(inorderResult, *nodeCount, postorderResult, *nodeCount);
+	for(int i = 0; i < *nodeCount; i++){
+		printf("root[%d].val = %d\n", i, root[i].val);
+	}
 	
 	//free(result);
 	//free(nodeCount);

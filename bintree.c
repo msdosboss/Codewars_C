@@ -9,46 +9,43 @@ struct TreeNode{
 	
 };
 
-void buildTreeHelper(int *inorder, int *postorder, int size, struct TreeNode *root, int leftNodeOffset, int *n){		//leftNodeOffset is the amount of right steps we went if the node went right from also has a left node
+void buildTreeHelper(int *inorder, int *postorder, int size, struct TreeNode *current, int leftNodeOffset){		//leftNodeOffset is the amount of right steps we went if the node went right from also has a left node
 	int inorderRootIndex;
-	int orca = 0;	
 	for(int i = 0; i < size; i++){
-		if(inorder[i] == postorder[size - 1]){
+		if(inorder[i + leftNodeOffset] == postorder[size - 1]){
 			inorderRootIndex = i;
+			break;
 		}
 	}
-	root[*n].val = inorder[inorderRootIndex];
-	printf("orca\n");
-	//fflush(stdout);
+	current->val = inorder[inorderRootIndex + leftNodeOffset];
 	if(inorderRootIndex != 0){		//traversing the left side
-		root[*n].left = &(root[*n + 1]);	
-		(*n)++;
-		printf("left traversal n = %d\n", *n);
-		fflush(stdout);
-		buildTreeHelper(inorder, postorder, inorderRootIndex, root, leftNodeOffset, n);
+		current->left = malloc(sizeof(struct TreeNode));	
+		buildTreeHelper(inorder, postorder, inorderRootIndex, current->left, leftNodeOffset);
 	}
 	else{
-		root[*n].left == NULL;
+		current->left = NULL;
 	}
-	if(size > inorderRootIndex){		//traversing the right side
-		if(orca == 1){
-			leftNodeOffset++;
-		}	
-		root[*n].right = &(root[*n + 1]);
-		(*n)++;
-		printf("right traversal\n");
-		fflush(stdout);
-		buildTreeHelper(&(inorder[inorderRootIndex]), &(postorder[inorderRootIndex]), size - 1, root, leftNodeOffset, n);
+	if(size > inorderRootIndex + 1){		//traversing the right side
+		leftNodeOffset++;
+		current->right = malloc(sizeof(struct TreeNode));
+		buildTreeHelper(&(inorder[inorderRootIndex]), &(postorder[inorderRootIndex]), size - 1 - inorderRootIndex, current->right, leftNodeOffset);
 	}
 	else{
-		root[*n].right == NULL;
+		current->right = NULL;
 	}
 }
 
 struct TreeNode *buildTree(int *inorder, int inorderSize, int *postorder, int postorderSize){
-	struct TreeNode *root = malloc(sizeof(struct TreeNode) * inorderSize);
-	int n = 0;
-	buildTreeHelper(inorder, postorder, inorderSize, root, 0, &n);
+	if(inorder[0] == -1 && postorder[0] == -1){
+		struct TreeNode *root = malloc(sizeof(struct TreeNode));
+		root->left = NULL;
+		root->right = NULL;
+		root->val = -1;
+		return root
+	}
+	struct TreeNode *root = malloc(sizeof(struct TreeNode));
+	buildTreeHelper(inorder, postorder, inorderSize, root, 0);
+	printf("root->val = %d\n", root->val);
 	return root;
 }
 
@@ -350,17 +347,20 @@ int main(){
 		}
 	}*/
 	
+	int inorder[5] = {9, 3, 15, 20, 7};
+	int postorder[5] = {9, 15, 7, 20, 3};
+
 	int *postorderResult = postorderTraversal(a, nodeCount);
 	//int *result = preorderTraversal(a, nodeCount);
 	int *inorderResult = inorderTraversal(a, nodeCount);
 	/*for(int i = 0; i < *nodeCount; i++){
 		printf("result[%d] = %d\n", i, result[i]);
 	}//*/
-	struct TreeNode *root = buildTree(inorderResult, *nodeCount, postorderResult, *nodeCount);
+	struct TreeNode *root = buildTree(inorder, 5, postorder , 5);
+	int *newTreeResults = postorderTraversal(root, nodeCount);	
 	for(int i = 0; i < *nodeCount; i++){
-		printf("root[%d].val = %d\n", i, root[i].val);
+		printf("newTreeResults[%d].val = %d\n", i, newTreeResults[i]);
 	}
-	
 	//free(result);
 	//free(nodeCount);
 

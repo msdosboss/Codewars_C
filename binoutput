@@ -1,0 +1,94 @@
+size = 8
+the value we are looking for is 12
+inorder[0 - 0] = 69
+inorder[1 - 0] = 21
+inorder[2 - 0] = 123
+inorder[3 - 0] = 12
+root[0].val = 12
+inorderRootIndex before left = 3
+currentIndex = 0
+left traversal
+size = 3
+the value we are looking for is 21
+inorder[0 - 0] = 69
+inorder[1 - 0] = 21
+root[1].val = 21
+inorderRootIndex before left = 1
+currentIndex = 1
+left traversal
+size = 1
+the value we are looking for is 69
+inorder[0 - 0] = 69
+root[2].val = 69
+inorderRootIndex before left = 0
+currentIndex = 2
+2s left node is null
+inorderRootIndex before right = 0
+currentIndex = 2
+2s right node is null
+inorderRootIndex before right = 1
+currentIndex = 1
+right traversal
+size = 1
+the value we are looking for is 123
+inorder[0 - 1] = 123
+root[3].val = 21
+inorderRootIndex before left = 0
+currentIndex = 3
+3s left node is null
+inorderRootIndex before right = 0
+currentIndex = 3
+3s right node is null
+inorderRootIndex before right = 3
+currentIndex = 0
+right traversal
+size = 4
+the value we are looking for is 420
+inorder[0 - 1] = 3211
+inorder[1 - 1] = 420
+root[4].val = 3211
+inorderRootIndex before left = 1
+currentIndex = 4
+left traversal
+size = 1
+the value we are looking for is 3211
+inorder[0 - 1] = 3211
+root[5].val = 12
+inorderRootIndex before left = 0
+currentIndex = 5
+5s left node is null
+inorderRootIndex before right = 0
+currentIndex = 5
+5s right node is null
+inorderRootIndex before right = 1
+currentIndex = 4
+right traversal
+size = 2
+the value we are looking for is 881
+inorder[0 - 2] = 881
+root[6].val = 3211
+inorderRootIndex before left = 0
+currentIndex = 6
+6s left node is null
+inorderRootIndex before right = 0
+currentIndex = 6
+right traversal
+size = 1
+the value we are looking for is 321
+inorder[0 - 3] = 321
+root[7].val = 3211
+inorderRootIndex before left = 0
+currentIndex = 7
+7s left node is null
+inorderRootIndex before right = 0
+currentIndex = 7
+7s right node is null
+orca
+root[0].val = 12
+root[1].val = 21
+root[2].val = 69
+root[3].val = 21
+root[4].val = 3211
+root[5].val = 12
+root[6].val = 3211
+root[7].val = 3211

@@ -9,6 +9,14 @@ struct TreeNode{
 	
 };
 
+struct Node{
+	int val; 
+	struct Node *left;
+	struct Node *right;
+	struct Node *next;
+	
+};
+
 void buildTreeHelper(int *inorder, int *postorder, int size, struct TreeNode *current, int leftNodeOffset){		//leftNodeOffset is the amount of right steps we went if the node went right from also has a left node
 	int inorderRootIndex;
 	for(int i = 0; i < size; i++){
@@ -145,6 +153,22 @@ void layerCounter(struct TreeNode *root, int *layerCount, int n){
 	}
 
 }
+void nodeLayerCounter(struct Node *root, int *layerCount, int n){	//nodeLayerCount is layerCount but for the Node struct
+	if(root == NULL){
+		return;
+	}
+	
+	
+	*layerCount = (*layerCount < n + 1) ? n + 1: *layerCount;
+	
+	if(root->left != NULL){
+		nodeLayerCounter(root->left, layerCount, n + 1);
+	}
+	if(root->right != NULL){
+		nodeLayerCounter(root->right, layerCount, n + 1);		
+	}
+
+}
 
 void nodePerLayerer(struct TreeNode *root, int *nodePerLayer, int n){
 	if(root == NULL){
@@ -165,6 +189,18 @@ int maxDepth(struct TreeNode *root){
 	layerCounter(root, &max, 0);
 	return max;
 }
+
+void connectHelper(){
+
+}
+
+
+struct Node* connect(struct Node *root){
+	int layerCount = 0;
+	nodeLayerCounter(root, &layerCount, 0);
+	struct Node *nextChainer = malloc(sizeof(struct Node) * layerCount);
+}
+
 
 void levelHelper(struct TreeNode *current, int **results, int *index, int n){
 	if(current == NULL){

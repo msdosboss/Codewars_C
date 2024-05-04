@@ -8,6 +8,15 @@ struct TreeNode{
 	struct TreeNode *right;
 	
 };
+
+struct Node{
+	int val; 
+	struct Node *left;
+	struct Node *right;
+	struct Node *next;
+	
+};
+
 void inPrebuildTreeHelper(int *inorder, int *preorder, int size, struct TreeNode *current, int leftNodeOffset){		//leftNodeOffset is the amount of right steps we went if the node went right from also has a left node
 	int inorderRootIndex;
 	for(int i = 0; i < size; i++){
@@ -48,15 +57,6 @@ struct TreeNode *inPrebuildTree(int *inorder, int inorderSize, int *preorder, in
 }
 
 void inPostbuildTreeHelper(int *inorder, int *postorder, int size, struct TreeNode *current, int leftNodeOffset){		//leftNodeOffset is the amount of right steps we went if the node went right from also has a left node
-struct Node{
-	int val; 
-	struct Node *left;
-	struct Node *right;
-	struct Node *next;
-	
-};
-
-void buildTreeHelper(int *inorder, int *postorder, int size, struct TreeNode *current, int leftNodeOffset){		//leftNodeOffset is the amount of right steps we went if the node went right from also has a left node
 	int inorderRootIndex;
 	for(int i = 0; i < size; i++){
 		if(inorder[i + leftNodeOffset] == postorder[size - 1]){

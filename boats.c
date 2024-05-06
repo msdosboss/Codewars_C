@@ -1,3 +1,5 @@
+//https://leetcode.com/problems/boats-to-save-people/description/
+
 #include <stdio.h>
 #include <stdlib.h>
 

@@ -20,14 +20,13 @@ unsigned levenshtein(const char *a, const char *b) {
 
 	for(int i = 1; i <= bLength; i++){
 		for(int j = 1; j <= aLength; j++){
-			int minVal = dp[i - 1][j - 1];
-			if(dp[i - 1][j] < minVal){
-				minVal = dp[i - 1][j];
+			dp[i][j] = dp[i - 1][j - 1] + ((a[j - 1] == b[i - 1]) ? 0 : 1);
+			if(dp[i - 1][j] + 1 < dp[i][j]){
+				dp[i][j] = dp[i - 1][j] + 1;
 			}
-			if(dp[i][j - 1] < minVal){
-				minVal = dp[i][j - 1];
+			if(dp[i][j - 1] + 1 < dp[i][j]){
+				dp[i][j] = dp[i][j - 1] + 1;
 			}
-			dp[i][j] = minVal + ((a[j - 1] == b[i - 1]) ? 0 : 1);
 		}
 	}
 
